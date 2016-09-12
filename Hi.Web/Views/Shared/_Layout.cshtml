@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        .clearfix {
+            overflow: auto;
+            _height: 1%;
+        }
+
+        * {
+            /*padding: 0px;*/ /*这里会影响百度编辑器的 序列*/
+            margin: 0px;
+            box-sizing: border-box; /*设置元素边框为 内容 + padding + 边框的宽度（不包括margin）;
+        [如果默认不设置此属性的话 那么宽度仅仅只是 元素里面的内容宽度] */
+        }
+
+        body {
+            background-color: #f8f8f8;
+        }
+    </style>
+    <link href="~/Content/jobIndex.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <div>
+        <div class="mesg"></div>
+        <div class="jobdiv">
+            <div id="div_menu" style="width: 100%;margin-bottom:5px;">
+                <div style="width: 100%; background-color: #eae4e4; border-top:1px dashed #808080; margin: 0 auto; padding: 5px; height: 35px;">
+                    <div style="margin: 0 auto; display:table; width: 60%; text-align:center; color: #fff">
+                        <a class="div_a_bottom" href="/Job/Index" target="_blank">首页</a>
+                        <a class="div_a_bottom" href="/Job/Map" target="_blank">职位地图</a>
+                        <a class="div_a_bottom" href="#">关于</a>
+                    </div>
+                </div>
+            </div>
+            @RenderBody()
+            <div>
+                <div onclick="topdiv_click(this)" onmouseover="topdiv_ouseover(this)" onmouseout="topdiv_mouseout(this)" style="position: fixed; bottom: 50px; right: 15px; width: 36px; height: 65px; background: transparent url(&quot;/Images/job/top.png&quot;) no-repeat scroll 0px -65px;" title="回到顶部" id="scrollUp">
+                </div>
+                <div id="div_bottom" style="position: fixed; bottom: 0px; left: 0px; width: 100%;">
+                    <div style="width: 100%; background-color: #eae4e4; border-top:1px dashed #808080; margin: 0 auto; padding: 5px; height: 35px;">
+                        <div style="margin: 0 auto; display:table; width: 60%; text-align:center; color: #fff">
+                            <a class="div_a_bottom" href="http://www.cnblogs.com/zhaopei/p/job_hunting.html" target="_blank">借鉴博客</a>
+                            <a class="div_a_bottom" href="#" target="_blank">建议留言</a>
+                            <a class="div_a_bottom" href="#">关于</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function topdiv_click() {
+           
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

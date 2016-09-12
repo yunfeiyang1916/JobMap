@@ -1,0 +1,87 @@
+﻿@model List<Job.Model.PositionReport>
+@{
+    ViewBag.Title = "报表";
+}
+<div id="container"
+     style="width: 800px; height: 400px; margin: 0 auto"></div>
+
+@section Scripts{
+    <script src="~/Scripts/highcharts/js/highcharts.js"></script>
+    <script type="text/javascript">
+        var chart;
+        $(function () {
+            $("#container").highcharts({
+                chart: {
+                    type: "column"
+                },
+                //设置一级标题
+                title: {
+                    text: '职位统计图',
+                    x: -20 //center
+                },
+                //设置二级标题
+                subtitle: {
+                    text: '各省市职位对比',
+                    x: -20
+                },
+                //设置x轴的标题
+                xAxis: {
+                    categories: ['面议', '0-5k', '5-10k', '10-15k', '15-20k', '20-25k', '25k以上']
+                },
+                //设置y轴
+                yAxis: {
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                        this.x + ': ' + this.y;//鼠标放在数据点的显示信息，但是当设置显示了每个节点的数据项的值时就不会再有这个显示信息
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',//设置说明文字的文字 left/right/top/
+                    verticalAlign: 'top',
+                    x: -10,
+                    y: 100,
+                    borderWidth: 0
+                },
+                exporting: {
+                    enabled: true //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                //数据
+                series: [
+                    @foreach (var item in Model)
+                    {
+                        @Html.Raw(item.ToString()+",")
+                    }
+                    //{
+                    ////每条线的名称
+                    //name: '北京',
+                    //    //每条线的数据
+                    //    data: [100, 200, 30, 20, 10, 5]
+                    //},
+                    //{
+                    //    //每条线的名称
+                    //    name: '杭州',
+                    //    //每条线的数据
+                    //    data: [80, 20, 10, 10, 30, 5]
+                    //},
+                ]
+
+            });
+        });
+    </script>
+}

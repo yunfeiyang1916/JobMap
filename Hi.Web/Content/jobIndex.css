@@ -1,0 +1,257 @@
+﻿/*PC端*/
+.jobdiv {
+    margin: 5px;
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color: #faf6f6;
+}
+
+.row1 {
+    /*padding-bottom: 20px;*/
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #d9d5d5;
+    border-bottom: none;
+}
+
+    .row1:hover {
+        background-color: #f2dbb2;
+    }
+
+    .row1.nthchild {
+        background-color: #eee7e7;
+    }
+
+    .row1 div.col {
+        float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        font-size: 12px;
+    }
+
+    .row1 .col1_div1 {
+        font-size: 15px;
+    }
+
+    .row1 div.col1_div {
+        float: none;
+        padding: 0px;
+        padding-top: 3px;
+    }
+
+    .row1 div.col3 {
+        width: 14%;
+    }
+
+    .row1 div.col4 {
+        width: 16%;
+    }
+
+    .row1 div.col5 {
+        width: 8%;
+    }
+
+    .row1 div.col6 {
+        width: 8%;
+    }
+
+    .row1 div.col7 {
+        width: 19%;
+    }
+
+    .row1 div.col1 {
+        width: 35%;
+        line-height: normal;
+        padding-top: 10px;
+    }
+
+.div_visited {
+    background-color: rgb(232, 237, 232);
+}
+
+a {
+    text-decoration: none;
+    color: #038bd9;
+}
+
+.dataInfo {
+    text-align: center;
+    font-size: 12px;
+    border: 1px dashed #f2d09b;
+    max-height: 200px;
+    overflow: auto;
+    padding: 10px;
+}
+
+#inp_key {
+    width: 300px;
+    height: 30px;
+    margin: auto;
+}
+
+#but {
+    width: 80px;
+    height: 30px;
+}
+
+.scrollUp {
+    animation-name: myfirst;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-play-state: running;
+    /*animation-fill-mode:forwards;*/
+    -webkit-animation-name: myfirst;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-play-state: running;
+    /*-webkit-animation-fill-mode:forwards;*/
+}
+
+@keyframes myfirst {
+    0% {
+        bottom: 50px;
+    }
+
+    100% {
+        bottom: 800px;
+    }
+}
+
+@-webkit-keyframes myfirst {
+    0% {
+        bottom: 50px;
+    }
+
+    100% {
+        bottom: 800px;
+    }
+}
+
+.sodivBut, .sodivChk {
+    float: left;
+    height: 33px;
+    line-height: 30px;
+}
+
+.sodivChk {
+    margin-left: 8px;
+}
+
+.sodiv {
+    /*width: 60%;
+    float: left;*/
+    display: table;
+    margin: 0px auto;
+}
+
+.jobHeadDiv {
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    /*padding:10px;*/
+    border: 1px dashed #d5cdcd;
+    border-bottom: none;
+    background-color: #7dc8f3;
+}
+
+#inp_key, #but {
+    /*background-color: #7cbade;*/
+}
+
+.jobHeadDiv a, .temp_place {
+    color: #fff;
+}
+
+.hid_place_div {
+    border: 1px dashed #d1d4e8;
+    padding-bottom: 10px;
+    display: none;
+    margin-top: 5px;
+    padding-top: 5px;
+    position: absolute;
+    width: 644px;
+    left: 353px;
+    background-color: #7dc8f3;
+}
+
+.dataDiv {
+    background-color: rgb(250, 251, 251);
+}
+
+.jobHeadDiv .select_place_a, .select_place_a .temp_place {
+    color: red;
+}
+
+.mytableSelect, .hid_place_div {
+    padding: 10px;
+}
+
+.div_a_bottom {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+* {
+    color: #666;
+}
+/*移动端*/
+@media(max-width:992px) {
+    .div_visited {
+        background-color: #88d17d;
+    }
+
+    .hid_place_div, .jobHeadDiv {
+        background-color: #f7bb5e;
+    }
+
+    .jobdiv {
+        margin: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        /*background-color: #cee5db;*/
+    }
+
+    #inp_key {
+        width: 150px;
+    }
+
+    #but {
+        width: 80px;
+    }
+
+    .sodivBut, .sodivChk {
+        float: none;
+    }
+
+    .row1 div.col1 {
+        width: 60%;
+    }
+
+    .row1 div.col3 {
+        width: 40%;
+    }
+
+    .row1 div.col4 {
+        width: 30%;
+    }
+
+    .row1 div.col5 {
+        width: 20%;
+    }
+
+    .row1 div.col6 {
+        width: 20%;
+    }
+
+    .row1 div.col7 {
+        width: 30%;
+    }
+
+    .div_a_bottom {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

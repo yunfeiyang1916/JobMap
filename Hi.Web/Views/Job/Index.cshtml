@@ -1,0 +1,266 @@
+﻿@{
+    ViewBag.Title = "找工作~~各大招聘网站实时信息综合查询~";
+}
+
+<div class="jobHeadDiv">
+    <div class="clearfix">
+        <div class="sodiv clearfix">
+            <div class="sodivBut">
+                <input type="text" class="" name="" id="inp_key" onkeyup="keyupsojob();" value=".net">
+                <input type="button" value="重新搜索" id="but" onclick="sojob();">
+            </div>
+            <div class="sodivChk">
+                <input type="checkbox" checked="checked" id="chk_zhilian" value="智联">
+                <a class="trparty_a" href="http://www.zhaopin.com" target="_blank">智联</a>
+                <input type="checkbox" id="chk_liepin" value="猎聘">
+                <a class="trparty_a" href="http://www.liepin.com" target="_blank">猎聘</a>
+                <input type="checkbox" id="chk_qiancheng" value="前程">
+                <a class="trparty_a" href="http://51job.com" target="_blank">前程</a>
+                <input type="checkbox" id="chk_lashou" value="拉勾">
+                <a class="trparty_a" href="http://www.lagou.com" target="_blank">拉勾</a>
+            </div>
+        </div>
+    </div>
+    <div class="mytableSelect">
+        <span class="title">工作地点：</span>
+        <a class="place_a " onclick="select_place(this);" href="javascript:;">北京</a>
+        <a class="place_a " onclick="select_place(this);" href="javascript:;">上海</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">深圳</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">广州</a>
+        <a class="place_a select_place_a" onclick="select_place(this);" href="javascript:;">杭州</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">成都</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">南京</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">武汉</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">西安</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">厦门</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">长沙</a>
+        <a class="place_a" onclick="select_place(this);" href="javascript:;">苏州</a>
+        <a class="place_a temp_place_a" onclick="select_place(this);" href="javascript:;">
+            <span class="temp_place">天津</span>
+        </a>
+        <a class="more_a" onclick="get_place(this);" href="javascript:;" style="">更多</a>
+
+        <span class="html_prace"></span>
+    </div>
+    <div class="hid_place_div" style="">
+        <div onmouseout="hid_hide(this, event);">
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">重庆</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">郑州</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">青岛</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">合肥</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">福州</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">济南</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">大连</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">珠海</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">无锡</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">佛山</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">东莞</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">宁波</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">常州</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">沈阳</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">石家庄</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">昆明</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">南昌</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">南宁</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">哈尔滨</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">海口</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">中山</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">惠州</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">贵阳</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">长春</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">太原</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">嘉兴</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">泰安</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">昆山</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">烟台</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">兰州</a>
+            <a class="hid_place_a" onclick="select_hid_place(this);" href="javascript:;">泉州</a>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<div class="dataDiv" onclick="" style="">
+</div>
+<div style="text-align: center; margin-bottom: 40px">
+    <div class="dataload" style="display: block;">
+        <a href="javascript:;" onclick="GetZhaoPinInfo();">点击加载更多</a>
+    </div>
+    <div class="dataloadingdiv" style="display: none;">
+        <div style="color:red">数据加载中...</div>
+        <img src="~/Images/job/loadingAnimation.gif" />
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var apiHref = "";
+    var isLoading = false;
+    var pageIndex = 1;//页码
+    var place = "杭州";//地区
+    var key = ".net";//搜索关键字
+    var sources = "智联";//数据源
+    var url = apiHref + "/api/HiJob?place=" + place + "&key=" + key + "&sources=" + sources + "&pageIndex=" + pageIndex;
+
+    //点击搜索
+    function sojob() {
+        pageIndex = 1;
+        $(".dataDiv").html("");
+        setJobValue();
+        loadData(url);
+    };
+
+    function setJobValue() {
+        place = $(".select_place_a").text();
+        key = $("#inp_key").val();
+        sources = "";
+        $(":checked").each(function () {
+            sources += $(this).val() + "_";
+        });
+        url = apiHref + "/api/HiJob?place=" + place + "&key=" + key + "&sources=" + sources + "&pageIndex=" + pageIndex;
+    }
+    //加载数据
+    function loadData(url) {
+        $.ajax({
+            url: url,
+            data: null,
+            beforeSend: function (XHR) {
+                $(".dataload").hide();
+                $(".dataloadingdiv").show();
+            },
+            success: function (data) {
+                $(".dataload").show();
+                $(".dataloadingdiv").hide();
+                if (data.length <= 0) {
+                    $(".dataload").html("已全部加载完成");
+                }
+                for (var i = 0; i < data.length; i++) {
+                    var tempDiv = "";
+                    tempDiv += "<div class='row1 clearfix' onclick='clickRow(this);'>";
+                    tempDiv += "<div class='col col1'>" +
+                                   "<div class='col1_div col1_div1'><a class='info_url' href='" + data[i].info_url + "' target='_blank' >"
+                                         + data[i].titleName + "</a></div>" +
+                                   "<div class='col1_div col1_div2'>" + data[i].company + "</div></div>";
+                    tempDiv += "<div class='col col3'>" + data[i].city + "</div>";
+                    tempDiv += "<div class='col col4'>" + data[i].date + "</div>";
+                    tempDiv += "<div class='col col5'>" + data[i].salary + "</div>";
+                    tempDiv += "<div class='col col6'>" + data[i].salary_em + "</div>";
+                    tempDiv += "<div class='col col7'>" + data[i].source + "</div>";
+                    tempDiv += "</div>";
+                    $(".dataDiv").append(tempDiv);
+                }
+                isLoading = false;
+            },
+            error: function () { },
+            dataType: "json"
+        });
+    }
+
+    //页面加载完成时
+    $(function () {
+        loadData(url);
+    });
+
+    //滚动条
+    $(window).scroll(function () {
+        var scrollTop = $(window).scrollTop();
+        var top = $(document).height() - $(window).height() - scrollTop;
+        if (top == 0) {
+            if (isLoading == false) {
+                $(".dataload").hide();
+                $(".dataloadingdiv").show();
+                isLoading = true;
+                pageIndex++;
+                setJobValue();
+                loadData(url);
+            }
+        }
+        if (scrollTop >= 100) {
+            $("#scrollUp").slideDown();
+        }
+    });
+
+    //点击row行
+    function clickRow(obj) {
+        return;
+        //修改class 来改变背景样式
+        if ($(obj).hasClass("nthchild"))
+            $(obj).removeClass("nthchild");
+        if (!$(obj).hasClass("div_visited"))
+            $(obj).addClass("div_visited");
+
+        //请求详细信息
+        var url = $(obj).find(".info_url").attr("href");
+        $(obj).next().siblings().each(function () {
+            if ($(this).hasClass("dataInfo"))
+                $(this).hide();
+        });
+
+        if ($(obj).next().hasClass("dataInfo"))
+            $(obj).next().toggle();
+        else
+            $(obj).after("<div class='dataInfo'>正在加载...</div>");
+        $.ajax({
+            url: apiHref + "/api/HiJob?url=" + url,
+            data: null,
+            beforeSend: function (XHR) {
+            },
+            success: function (data) {
+                $(obj).next(".dataInfo").html(eval(data.data));
+            },
+            dateType: "json"
+        });
+    }
+
+    function get_place() {
+        $(".hid_place_div").toggle();//.show();
+        $(".hid_place_div").css("position", "absolute")
+            .css("width", $(".mytableSelect").css("width"))
+        .css("left", $(".mytableSelect")[0].offsetLeft);
+    }
+
+    function selectHotCity(obj) {
+        $(".select_place_a").removeClass("select_place_a");
+        $(".temp_place_a span").html($(obj).find("a").html());
+        $(".temp_place_a").addClass("select_place_a");
+        $(".html_prace").html("");
+    }
+
+    function select_hid_place(obj) {
+        $(".select_place_a").removeClass("select_place_a");
+        $(".temp_place_a span").html($(obj).text());
+        $(".temp_place_a").addClass("select_place_a");
+        $(".hid_place_div").hide();
+    }
+
+    function select_place(obj) {
+        $(".select_place_a").removeClass("select_place_a");
+        $(obj).addClass("select_place_a");
+    }
+    //回车搜索
+    function keyupsojob() {
+        if (event.keyCode == 13)
+            sojob();
+    }
+    function hid_hide(obj, e) {
+    }
+    function topdiv_mouseout(obj) {
+        $(obj).css("background", "url(/Images/job/top.png)  no-repeat scroll 0px -65px transparent");
+    }
+    function topdiv_ouseover(obj) {
+        $(obj).css("background", "url(/Images/job/top.png)  no-repeat scroll 0px 0px transparent");
+    }
+    function topdiv_click() {
+        $("#scrollUp").removeClass().addClass("scrollUp");
+        var set = setTimeout(function () {
+            $("#scrollUp").removeClass();
+            $("#scrollUp").hide();
+        }, 500)
+
+        if (document.documentElement && document.documentElement.scrollTop) {
+            document.documentElement.scrollTop = 1;
+        } else if (document.body) {
+            document.body.scrollTop = 1;
+        }
+    }
+</script>

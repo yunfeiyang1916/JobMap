@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Pages.master.cs" Inherits="Job.UI.Pages.Master.Pages" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="haojima,好记吗,找工作,各大招聘网站,招聘网信息查询,各大招聘网站信息实时查询浏览">
+    <meta name="description" content="haojima.net,好记吗？据说聪明的人三秒钟就能记住，非常聪明的人一秒钟就能记住。您记住了吗？">
+    <title><%=mytitle %></title>
+    <link rel="shortcut icon" href="../../JobResources/imgs/123.ico" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+        <script src="../../JobResources/script/jquery-1.7.1.min.js"></script>
+        <script src="../../JobResources/script/common/common.js"></script>
+        <script src="../../JobResources/script/common/MyDataPack.js"></script>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div style="display: none">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1254624500'%3E%3C/span%3E%3Cscript src='" +
+                cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254624500' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+
+        <script type="text/javascript">
+            var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1254829001'%3E%3C/span%3E%3Cscript src='"
+                + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254829001' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+    </div>
+</body>
+</html>

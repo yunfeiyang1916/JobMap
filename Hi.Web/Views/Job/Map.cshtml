@@ -1,0 +1,424 @@
+﻿@{
+    Layout = null;
+    String baiduAk = ViewBag.BaiduAk;
+    String baiduJsAk = ViewBag.BaiduJsAk;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>职位分布图</title>
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+            font-size: 14px;
+        }
+
+        #l-map {
+            width: 100%;
+            height: 95%;
+            overflow: hidden;
+        }
+
+        #result {
+            width: 100%;
+        }
+
+        li {
+            line-height: 28px;
+        }
+
+        .cityList {
+            height: 320px;
+            width: 372px;
+            overflow-y: auto;
+        }
+
+        .sel_container {
+            z-index: 9999;
+            font-size: 12px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 150px;
+            background: rgba(255,255,255,0.8);
+            height: 30px;
+            line-height: 30px;
+            padding: 5px;
+        }
+
+        .map_popup {
+            position: absolute;
+            z-index: 200000;
+            width: 382px;
+            height: 344px;
+            right: 0px;
+            top: 40px;
+        }
+
+            .map_popup .popup_main {
+                background: #fff;
+                border: 1px solid #8BA4D8;
+                height: 100%;
+                overflow: hidden;
+                position: absolute;
+                width: 100%;
+                z-index: 2;
+            }
+
+            .map_popup .title {
+                background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
+                color: #6688CC;
+                font-weight: bold;
+                height: 24px;
+                line-height: 25px;
+                padding-left: 7px;
+            }
+
+            .map_popup button {
+                background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;
+                cursor: pointer;
+                height: 12px;
+                position: absolute;
+                right: 4px;
+                top: 6px;
+                width: 12px;
+            }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=@baiduJsAk"></script>
+    <!-- 加载百度地图样式信息窗口 -->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <!-- 加载城市列表 -->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <div id="l-map"></div>
+    <div id="result" style="display:none;">
+        <button id="open">打开</button><button id="close">关闭</button><br />
+        <input type="text" value="" id="lng" placeholder="请输入经度" />&nbsp;&nbsp;<input type="text" value="" id="lat" placeholder="请输入纬度" /><br />
+        <button id="show">显示</button><br />
+        结果：<text id="resultTxt"></text>
+    </div>
+
+    <!--职位列表-->
+    <div class="sel_container" style="right:230px;"><strong id="curKey">.net</strong> [<a id="curKeyText" href="javascript:void(0)">更换职位</a>]</div>
+    <div class="map_popup" id="keyList" style="display:none;">
+        <div class="popup_main">
+            <div class="title">城市列表</div>
+            <div class="bmaplib_cityList">
+                <dl>
+                    <dt>职位：</dt>
+                    <dd>
+                        <a code="1" href="javascript:void(0)" onclick="changeKey('net','.net')">.net</a>
+                        <a code="2" href="javascript:void(0)" onclick="changeKey('java', 'java')">java</a>
+                        <a code="3" href="javascript:void(0)" onclick="changeKey('php','php')">php</a>
+                        <a code="4" href="javascript:void(0)" onclick="changeKey('accountant', '会计')">会计</a>
+                    </dd>
+                </dl>
+            </div>
+            <button id="popup_key_close"></button>
+        </div>
+    </div>
+
+    <!--来源列表-->
+    <div class="sel_container" style="right:120px;"><strong id="curSource">拉勾网</strong> [<a id="curSourceText" href="javascript:void(0)">更换来源</a>]</div>
+    <div class="map_popup" id="sourceList" style="display:none;">
+        <div class="popup_main">
+            <div class="title">城市列表</div>
+            <div class="bmaplib_cityList">
+                <dl>
+                    <dt>来源：</dt>
+                    <dd>
+                        <a code="1" href="javascript:void(0)" onclick="changeSource('智联招聘')">智联招聘</a>
+                        <a code="2" href="javascript:void(0)" onclick="changeSource('前程无忧')">前程无忧</a>
+                        <a code="3" href="javascript:void(0)" onclick="changeSource('猎聘网')">猎聘网</a>
+                        <a code="4" href="javascript:void(0)" onclick="changeSource('拉勾网')">拉勾网</a>
+                    </dd>
+                </dl>
+            </div>
+            <button id="popup_source_close"></button>
+        </div>
+    </div>
+    <!--城市列表-->
+    <div class="sel_container"><strong id="curCity">杭州市</strong> [<a id="curCityText" href="javascript:void(0)">更换城市</a>] 总数:<strong id="total"></strong></div>
+    <div class="map_popup" id="cityList" style="display:none;">
+        <div class="popup_main">
+            <div class="title">城市列表</div>
+            <div class="bmaplib_cityList">
+                <dl>
+                    <dt>热门：</dt>
+                    <dd>
+                        <a code="1" href="javascript:void(0)" onclick="changeCity('北京')">北京</a>
+                        <a code="2" href="javascript:void(0)" onclick="changeCity('上海')">上海</a>
+                        <a code="3" href="javascript:void(0)" onclick="changeCity('杭州')">杭州</a>
+                        <a code="4" href="javascript:void(0)" onclick="changeCity('苏州')">苏州</a>
+                        <a code="5" href="javascript:void(0)" onclick="changeCity('郑州')">郑州</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="cityList" id="citylist_container"></div>
+            <button id="popup_close"></button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //百度地图API功能
+        //创建地图实例
+        var map = new BMap.Map("l-map");
+        //创建点坐标
+        //var point = new BMap.Point(116.403694, 39.927552);
+        //初始化地图，设置中心点坐标和地图级别
+        map.centerAndZoom("杭州", 12);
+        map.enableScrollWheelZoom();
+        //添加默认缩放平移控件
+        map.addControl(new BMap.NavigationControl());
+        //来源于云数据库映射
+        var sourceGeotableIds = {
+            //拉勾网
+            lagou: { net: 150268, java: 151369, php: 151594, accountant: 151595 },
+            //智联招聘
+            zhilian: { net: 149937, java: 151604, php: 151605, accountant: 151606 },
+            //前程无忧
+            job51: { net: 150263, java: 151607, php: 151608, accountant: 151609 },
+            //猎聘网
+            liepin: { net: 150266, java: 151610, php: 151612, accountant: 151612 }
+        };
+        //自定义图层
+        var customLayer;
+        //云存储表id
+        var geotableId;
+        //职位
+        var key = 'net';
+        //来源
+        var source = '拉勾网';
+        //添加图层（核心）
+        function addCustomLayer() {
+            switch (source) {
+                case '智联招聘':
+                    geotableId = sourceGeotableIds.zhilian[key];
+                    break;
+                case '前程无忧':
+                    geotableId = sourceGeotableIds.job51[key];
+                    break;
+                case '猎聘网':
+                    geotableId = sourceGeotableIds.liepin[key];
+                    break;
+                case '拉勾网':
+                    geotableId = sourceGeotableIds.lagou[key];
+                    break;
+                default:
+                    geotableId = sourceGeotableIds.zhilian;
+            }
+            if (customLayer) {
+                map.removeTileLayer(customLayer);
+            }
+            customLayer = new BMap.CustomLayer({
+                geotableId: geotableId,
+                q: '', //检索关键字
+                tags: '', //空格分隔的多字符串
+                filter: "" //过滤条件,参考http://developer.baidu.com/map/lbs-geosearch.htm#.search.nearby
+            });
+            map.addTileLayer(customLayer);
+            customLayer.addEventListener('hotspotclick', callback);
+            //设置总数
+            setTotal();
+        }
+        //单击热点图层的回调
+        function callback(e) {
+            var customPoi = e.customPoi;//poi的默认字段
+            var contentPoi = e.content;//poi的自定义字段
+            var content = '<p style="width:280px;margin:0;line-height:20px;">最高职位名称：' + contentPoi.MaxPositionName +
+                           '<br/>最高薪水范围:' + contentPoi.MaxSalaryRange +
+                           '<br/>最低职位名称:' + contentPoi.MinPositionName +
+                           '<br/>最低薪水范围:' + contentPoi.MinSalaryRange +
+                           '<br/>职位数量:' + contentPoi.PositionCount +
+                            '<br/>地址:' + customPoi.address +
+                           '<br/>来源:' + contentPoi.Source +
+                           '<br/>更新日期:' + contentPoi.UpdateDate + '</p>';
+            var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+                title: customPoi.title, //标题
+                width: 290, //宽度
+                height: 140, //高度
+                panel: "panel", //检索结果面板
+                enableAutoPan: true, //自动平移
+                enableSendToPhone: true, //是否显示发送到手机按钮
+                searchTypes: [
+					BMAPLIB_TAB_SEARCH,   //周边检索
+					BMAPLIB_TAB_TO_HERE,  //到这里去
+					BMAPLIB_TAB_FROM_HERE //从这里出发
+                ]
+            });
+            var point = new BMap.Point(customPoi.point.lng, customPoi.point.lat);
+            searchInfoWindow.open(point);
+        }
+
+        //显示地图
+        addCustomLayer();
+
+        /***=============================================变更城市=======================================================================***/
+        // 创建CityList对象，并放在citylist_container节点内
+        var myCl = new BMapLib.CityList({ container: "citylist_container", map: map });
+
+        // 给城市点击时，添加相关操作
+        myCl.addEventListener("cityclick", function (e) {
+            // 修改当前城市显示
+            document.getElementById("curCity").innerHTML = e.name;
+
+            // 点击后隐藏城市列表
+            document.getElementById("cityList").style.display = "none";
+        });
+        // 给“更换城市”链接添加点击操作
+        document.getElementById("curCityText").onclick = function () {
+            var cl = document.getElementById("cityList");
+            if (cl.style.display == "none") {
+                cl.style.display = "";
+            } else {
+                cl.style.display = "none";
+            }
+        };
+        // 给城市列表上的关闭按钮添加点击操作
+        document.getElementById("popup_close").onclick = function () {
+            var cl = document.getElementById("cityList");
+            if (cl.style.display == "none") {
+                cl.style.display = "";
+            } else {
+                cl.style.display = "none";
+            }
+        };
+        //自定义城市改变事件
+        function changeCity(city) {
+            map.centerAndZoom(city, 12);
+            // 修改当前城市显示
+            document.getElementById("curCity").innerHTML = city;
+            // 点击后隐藏城市列表
+            document.getElementById("cityList").style.display = "none";
+            //设置总数
+            setTotal();
+        }
+
+        /***=============================================变更来源=======================================================================***/
+
+        // 给“更换来源”链接添加点击操作
+        document.getElementById("curSourceText").onclick = function () {
+            var cl = document.getElementById("sourceList");
+            if (cl.style.display == "none") {
+                cl.style.display = "";
+            } else {
+                cl.style.display = "none";
+            }
+        };
+        // 给来源上的关闭按钮添加点击操作
+        document.getElementById("popup_source_close").onclick = function () {
+            var cl = document.getElementById("sourceList");
+            if (cl.style.display == "none") {
+                cl.style.display = "";
+            } else {
+                cl.style.display = "none";
+            }
+        };
+
+
+        //自定义来源改变事件
+        function changeSource(source) {
+            // 修改当前来源显示
+            document.getElementById("curSource").innerHTML = source;
+            window.source = source;
+            // 点击后隐藏来源列表
+            document.getElementById("sourceList").style.display = "none";
+            addCustomLayer();
+        }
+        //设置总数
+        function setTotal() {
+            $.ajax({
+                type: "get",
+                dataType: 'jsonp',
+                //jsonp: "jsoncallback",
+                url: "http://api.map.baidu.com/geosearch/v3/local",
+                data: {
+                    'geotable_id': geotableId,
+                    'region': $("#curCity").text(),
+                    //这里使用服务端的ak
+                    'ak': '@baiduAk',
+                    //'filter':'Key:.net'
+                },
+                success: function (result) {
+                    $("#total").text(result.total);
+                }
+            });
+        }
+
+        /***=============================================变更职位=======================================================================***/
+
+        // 给“更换职位”链接添加点击操作
+        document.getElementById("curKeyText").onclick = function () {
+            var cl = document.getElementById("keyList");
+            if (cl.style.display == "none") {
+                cl.style.display = "";
+            } else {
+                cl.style.display = "none";
+            }
+        };
+        // 给职位上的关闭按钮添加点击操作
+        document.getElementById("popup_key_close").onclick = function () {
+            var cl = document.getElementById("keyList");
+            if (cl.style.display == "none") {
+                cl.style.display = "";
+            } else {
+                cl.style.display = "none";
+            }
+        };
+
+
+        //自定义职位改变事件
+        function changeKey(key, name) {
+            // 修改当前职位显示
+            document.getElementById("curKey").innerHTML = name;
+            window.key = key;
+            // 点击后隐藏职位列表
+            document.getElementById("keyList").style.display = "none";
+            addCustomLayer();
+        }
+
+
+        /***=============================================这是测试地图用的=======================================================================***/
+        //地址解析
+        var geocoder = new BMap.Geocoder();
+
+        document.getElementById("show").onclick = function () {
+            var lng = document.getElementById("lng").value;
+            var lat = document.getElementById("lat").value;
+            var point = new BMap.Point(lng, lat);
+            geocoder.getLocation(point, function (rs) {
+                var addComp = rs.addressComponents;
+                var result = lng + "," + lat + "：" + "商圈(" + rs.business + ")  地址(" + addComp.city + addComp.district + addComp.street + addComp.streetNumber + ")";
+                console.log(result);
+                var r = document.getElementById("resultTxt");
+                r.textContent = result;
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+                marker.setLabel(new BMap.Label(result, { offset: new BMap.Size(20, -10) }));
+                map.centerAndZoom(point, 18);
+            });
+        };
+
+        //打开图层事件
+        document.getElementById("open").onclick = function () {
+            addCustomLayer();
+        };
+        document.getElementById("close").onclick = function () {
+            if (customLayer) {
+                map.removeTileLayer(customLayer);
+            }
+        };
+
+        /***=============================================测试结束=======================================================================***/
+    </script>
+</body>
+</html>
