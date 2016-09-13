@@ -19,7 +19,7 @@
             //ProcessCompany(index);
 3、执行JobController下的CreateGeoTable用来创建云存储表。
 #### 效果图
-![github-01.jpg](效果图/百度地图云存储数据表.pnf "github-02.jpg")
+![github-01.jpg](效果图/百度地图云存储数据表.png "百度地图云存储数据表.png")
 
 3、爬虫与前端借鉴博客：http://www.cnblogs.com/zhaopei/p/job_hunting.html
    代理爬取借鉴博客：http://www.cnblogs.com/Lands-ljk/p/5673017.html
