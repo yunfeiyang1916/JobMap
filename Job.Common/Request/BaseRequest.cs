@@ -37,7 +37,7 @@ namespace Job.Common
         /// <summary>当前可用代理记录</summary>
         public ProxyInfoLog ProxyInfoLog { get { return _ProxyInfoLog; } set { _ProxyInfoLog = value; } }
 
-        private Int32 _MaxTryTimes=100;
+        private Int32 _MaxTryTimes=10;
         /// <summary>使用代理最大尝试次数，默认10次</summary>
         public Int32 MaxTryTimes { get { return _MaxTryTimes; } set { _MaxTryTimes = value; } }
         #endregion
