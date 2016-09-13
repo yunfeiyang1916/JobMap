@@ -36,6 +36,9 @@
             //猎聘网
             liepin: { net: 150266, java: 151610, php: 151612, accountant: 151612 }
         };
+5、将第二步爬取的poi坐标数据上传到对应云存储表里去。上传文件示例在目录“云存储表上传示例”下        
+ 
+
 #### 引用说明   
    爬虫与前端借鉴博客：http://www.cnblogs.com/zhaopei/p/job_hunting.html
    
