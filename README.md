@@ -1,5 +1,7 @@
 # JobMap
 职位分布图
+##效果图
+![github-01.jpg](/效果图/职位分布图.png "职位分布图.png")
 
 1、环境配置，分别需要在Hi.Web/Web.config与Job.Agent/App.config配置百度地图浏览器端（BaiduJsAk）与服务器端访问密钥BaiduAk
 
@@ -19,7 +21,7 @@
             //ProcessCompany(index);
 3、执行JobController下的CreateGeoTable用来创建云存储表。
 #### 效果图
-![github-01.jpg](效果图/百度地图云存储数据表.png "百度地图云存储数据表.png")
+![github-01.jpg](/效果图/百度地图云存储数据表.png "百度地图云存储数据表.png")
 
 3、爬虫与前端借鉴博客：http://www.cnblogs.com/zhaopei/p/job_hunting.html
    代理爬取借鉴博客：http://www.cnblogs.com/Lands-ljk/p/5673017.html
