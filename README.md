@@ -19,9 +19,23 @@
             //}
             //处理公司信息，并根据地址获取poi坐标
             //ProcessCompany(index);
-3、执行JobController下的CreateGeoTable用来创建云存储表。
+3、执行JobController下的CreateGeoTable用来在百度地图云平台创建云存储表。
 #### 效果图
 ![github-01.jpg](/效果图/百度地图云存储数据表.png "百度地图云存储数据表.png")
 
-3、爬虫与前端借鉴博客：http://www.cnblogs.com/zhaopei/p/job_hunting.html
+4、将第三步创建完云存储表的表id替换到Map.cshtml中
+#### 示例代码
+        //来源于云数据库映射
+        var sourceGeotableIds = {
+            //拉勾网
+            lagou: { net: 150268, java: 151369, php: 151594, accountant: 151595 },
+            //智联招聘
+            zhilian: { net: 149937, java: 151604, php: 151605, accountant: 151606 },
+            //前程无忧
+            job51: { net: 150263, java: 151607, php: 151608, accountant: 151609 },
+            //猎聘网
+            liepin: { net: 150266, java: 151610, php: 151612, accountant: 151612 }
+        };
+#### 引用说明   
+   爬虫与前端借鉴博客：http://www.cnblogs.com/zhaopei/p/job_hunting.html
    代理爬取借鉴博客：http://www.cnblogs.com/Lands-ljk/p/5673017.html
