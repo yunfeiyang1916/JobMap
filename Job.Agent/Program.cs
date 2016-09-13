@@ -229,14 +229,18 @@ namespace Job.Agent
             //request.GetJobs(".net", "北京");
 
             //这里是执行核心
+            //服务执行分三步，第一步拉取一批代理.第二步爬取职位信息.第三步根据爬取到的地址获取对应poi地址
+            //可以把下面的注释全放开一次性全跑完，不过这样使用时间长，并且一出错，还需要重头跑。建议一个个注释，一个个跑。
             //先跑一批代理，使用拉勾网站测试代理ip是否可用
             LaGouRequest request = new LaGouRequest();
             request.TestProxy(".net", "北京");
             //Int32 count = 4;
             //for (int i = 0; i < count; i++)
             //{
+            //    //爬取职位信息
             //    DownloadPosition(i);
             //}
+            //处理公司信息，并根据地址获取poi坐标
             //ProcessCompany(index);
             WriteLine("任务{0}结束，当前时间：{1}", index, DateTime.Now);
             return false;
@@ -276,7 +280,7 @@ namespace Job.Agent
             }
 
         }
-        /// <summary>处理公司信息</summary>
+        /// <summary>处理公司信息，并根据地址获取poi坐标</summary>
         /// <param name="index">线程序号</param>
         public void ProcessCompany(Int32 index)
         {
